@@ -27,6 +27,8 @@ public class User {
 
     private String email;
 
+    private String password;
+
     @OneToMany(mappedBy = News.Fields.user, cascade = CascadeType.ALL)
     @Builder.Default
     private Set<News> news = new HashSet<>();
@@ -35,4 +37,8 @@ public class User {
     @OrderColumn
     @Builder.Default
     private Set<Comment> comments = new HashSet<>();
+
+    @OneToMany(mappedBy = Comment.Fields.user, cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<Role> roles = new ArrayList<>();
 }

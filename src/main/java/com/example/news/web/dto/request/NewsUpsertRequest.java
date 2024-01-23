@@ -13,10 +13,6 @@ public class NewsUpsertRequest {
     @Positive(message = "ID must be greater than 0")
     Long categoryId;
 
-    @NotNull(message = "User ID is required")
-    @Positive(message = "ID must be greater than 0")
-    Long userId;
-
     @NotNull(message = "Content is required")
     @NotBlank(message = "Content should not be blank")
     @Size(min = 3, max = 300, message = "Content length must be less than {max} and greater than {min}")

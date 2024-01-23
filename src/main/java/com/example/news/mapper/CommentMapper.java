@@ -15,10 +15,10 @@ import java.util.List;
 @DecoratedWith(CommentMapperDelegate.class)
 public interface CommentMapper {
 
-    Comment requestToComment(CommentUpsertRequest request);
+    Comment requestToComment(Long userId, CommentUpsertRequest request);
 
     @Mapping(target = "id", source = "commentId")
-    Comment requestToComment(Long commentId, CommentUpsertRequest request);
+    Comment requestToComment(Long commentId, Long userId, CommentUpsertRequest request);
 
     @Mapping(target = "newsContent", expression = "java(comment.getNews().getContent())")
     CommentResponse commentToResponse(Comment comment);

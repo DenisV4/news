@@ -16,10 +16,10 @@ import java.util.List;
 @DecoratedWith(NewsMapperDelegate.class)
 public interface NewsMapper {
 
-    News requestToNews(NewsUpsertRequest request);
+    News requestToNews(Long userId, NewsUpsertRequest request);
 
     @Mapping(target = "id", source = "newsId")
-    News requestToNews(Long newsId, NewsUpsertRequest request);
+    News requestToNews(Long newsId, Long userId, NewsUpsertRequest request);
 
     @Ignore
     NewsResponse newsToResponse(News news);

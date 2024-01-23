@@ -1,6 +1,7 @@
 package com.example.news.repository;
 
 import com.example.news.model.User;
+import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -12,9 +13,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Override
     @EntityGraph(attributePaths = {User.Fields.news, User.Fields.comments})
-    Page<User> findAll(Pageable pageable);
+    @NonNull Page<User> findAll(@NonNull Pageable pageable);
 
     @Override
     @EntityGraph(attributePaths = {User.Fields.news, User.Fields.comments})
-    Optional<User> findById(Long id);
+    @NonNull Optional<User> findById(@NonNull Long id);
+
+    @EntityGraph(attributePaths = {User.Fields.roles})
+    Optional<User> findByName(String name);
 }

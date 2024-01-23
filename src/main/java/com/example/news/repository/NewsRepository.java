@@ -1,6 +1,7 @@
 package com.example.news.repository;
 
 import com.example.news.model.News;
+import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,13 +15,13 @@ public interface NewsRepository extends JpaRepository<News, Long>, JpaSpecificat
 
     @Override
     @EntityGraph(attributePaths = {News.Fields.category, News.Fields.user, News.Fields.comments})
-    Page<News> findAll(Specification<News> spec, Pageable pageable);
+    @NonNull Page<News> findAll(@NonNull Specification<News> spec, @NonNull Pageable pageable);
 
     @Override
     @EntityGraph(attributePaths = {News.Fields.category, News.Fields.user, News.Fields.comments})
-    Page<News> findAll(Pageable pageable);
+    @NonNull Page<News> findAll(@NonNull Pageable pageable);
 
     @Override
     @EntityGraph(attributePaths = {News.Fields.category, News.Fields.user, News.Fields.comments})
-    Optional<News> findById(Long id);
+    @NonNull Optional<News> findById(@NonNull Long id);
 }

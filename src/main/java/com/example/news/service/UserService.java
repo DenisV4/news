@@ -1,5 +1,6 @@
 package com.example.news.service;
 
+import com.example.news.model.Role;
 import com.example.news.model.User;
 import com.example.news.web.dto.request.Pagination;
 
@@ -11,7 +12,9 @@ public interface UserService {
 
     User findById(Long id);
 
-    User save(User user);
+    User findByName(String name);
+
+    User save(User user, List<Role> roles);
 
     User update(User user);
 

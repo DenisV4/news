@@ -1,6 +1,7 @@
 package com.example.news.service.impl;
 
 import com.example.news.exception.ResourceNotFoundException;
+import com.example.news.model.Role;
 import com.example.news.model.User;
 import com.example.news.repository.UserRepository;
 import com.example.news.service.UserService;
@@ -30,8 +31,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public User findByName(String name) {
+        return userRepository.findByName(name)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    @Override
+    public User save(User user, List<Role> roles) {
+        var newUser = userRepository.save(user);
+        roles.forEach(role -> role.setUser(newUser));
+        newUser.setRoles(roles);
+
+        return userRepository.save(newUser);
     }
 
     @Override

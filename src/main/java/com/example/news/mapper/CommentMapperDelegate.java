@@ -4,7 +4,6 @@ import com.example.news.model.Comment;
 import com.example.news.service.NewsService;
 import com.example.news.service.UserService;
 import com.example.news.web.dto.request.CommentUpsertRequest;
-import com.example.news.web.dto.response.CommentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class CommentMapperDelegate implements CommentMapper {
@@ -16,18 +15,18 @@ public abstract class CommentMapperDelegate implements CommentMapper {
     private UserService userService;
 
     @Override
-    public Comment requestToComment(CommentUpsertRequest request) {
+    public Comment requestToComment(Long userId, CommentUpsertRequest request) {
         return Comment
                 .builder()
-                .user(userService.findById(request.getUserId()))
+                .user(userService.findById(userId))
                 .news(newsService.findById(request.getNewsId()))
                 .text(request.getText())
                 .build();
     }
 
     @Override
-    public Comment requestToComment(Long commentId, CommentUpsertRequest request) {
-        var comment = requestToComment(request);
+    public Comment requestToComment(Long commentId, Long userId, CommentUpsertRequest request) {
+        var comment = requestToComment(userId, request);
         comment.setId(commentId);
         return comment;
     }

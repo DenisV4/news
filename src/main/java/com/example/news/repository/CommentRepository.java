@@ -2,6 +2,7 @@ package com.example.news.repository;
 
 import com.example.news.model.Comment;
 import com.example.news.model.News;
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -15,5 +16,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     @Override
     @EntityGraph(attributePaths = {Comment.Fields.news, Comment.Fields.user})
-    Optional<Comment> findById(Long aLong);
+
+    @NonNull Optional<Comment> findById(@NonNull Long aLong);
 }

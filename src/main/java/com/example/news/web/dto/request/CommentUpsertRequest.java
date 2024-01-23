@@ -13,10 +13,6 @@ public class CommentUpsertRequest {
     @Positive(message = "ID must be greater than 0")
     Long newsId;
 
-    @NotNull(message = "User ID is required")
-    @Positive(message = "ID must be greater than 0")
-    Long userId;
-
     @NotNull(message = "Text is required")
     @NotBlank(message = "Text should not be blank")
     @Size(min = 10, max = 100, message = "Text length must be less than {min} and greater than {max}")
